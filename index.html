@@ -2,21 +2,41 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>HTML Table Editors</title>
+  <title>Generic Table Editor</title>
+  <meta name="robots" content="noindex,nofollow" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js"></script>
+  <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script> 
+  <script>tinymce.init({
+    selector: 'textarea',
+    content_css: ['base.css', 'generic-tables.css'],
+    plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
+    menubar: false,
+    toolbar: 'newdocument | table tablerowprops tablecellprops tablemergecells | alignnone alignright bold styleselect | nonbreaking visualchars | preparetable code',
+    table_toolbar: 'tablerowprops tablecellprops tablemergecells | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol', // below every table
+    contextmenu: 'tableprops cell row column', // appears on right click
+    autoresize_max_height: 600,
+    formats: {
+      alignright: { selector: 'td,th', classes: 'numeric' },
+    },
+    style_formats: [
+      { title: 'Visually hidden text', inline: 'span', classes: 'visuallyhidden' },
+    ],
+    // only allow table elements, plus a few more useful inline elements
+    // br = if added, TinyMCE adds br's all over the place (but they don't get through to the source code to be copied), causing issues with marking of empty header cells
+    // class: source-tableeditor = in case we need to do something in slimmer
+    valid_elements: 'table[class:source-tableeditor|id],caption,col,colgroup[span],thead,tbody,tfoot,tr[class],td[scope|colspan|rowspan|class],th[scope|colspan|rowspan|class],strong,span[class],abbr[title],br',
+    forced_root_block: false,
+    table_grid: false,
+    table_advtab: false,
+    table_cell_advtab: false,
+    table_row_advtab: false,
+  });</script>
+<script>CustomElement.init(callback);</script>
   <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 <body>
+  <noscript>Sorry, this editor only works with JavaScript.</noscript>
 
-  <h1>HTML Table Editors</h1>
-
-  <p>These editors are for when Markdown just doesn't cut it. They are highly configured versions of <a href="https://www.tinymce.com/">TinyMCE</a>. To get the code, just click on the 'source code' button (the last button in the toolbar) and copy and paste.</p>
-
-  <ul>
-    <li><a href="generic-tables.html">Editor for generic tables</a> creates tables which can be used anywhere (except they need the 'numeric' class for right-aligning and a 'visuallyhidden' class, which is likely but not guaranteed to be available on most of GOV.UK)</li>
-    <li><a href="financial-tables.html">Editor for financial tables</a> creates tables which can currently only be used in HTML publications on GOV.UK</li>
-  </ul>
-
-  <p>Please note, when marking a header cell, some additional styling was added which helps to distinguish them from the other cells as there is otherwise no specific styling for them. That styling (i.e. the green line) will not appear in production.</p>
-
+  <textarea></textarea>
 </body>
 </html>
