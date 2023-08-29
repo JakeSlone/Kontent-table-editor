@@ -33,13 +33,14 @@
 
     
   });</script>
-<script>CustomElement.init((element, context) => { 
+<script>CustomElement.init((element, context) => {
+  console.log(context.projectId)
   setConfig(element.config); 
   setProjectId(context.projectId); 
   setIsDisabled(element.disabled); 
   setItemName(context.item.name); 
   setElementValue(element.value ?? ''); 
-  console.log(projectId)
+  
   updateWatchedElementValue(element.config.textElementCodename); 
 }); ;</script>
   <link rel="stylesheet" type="text/css" href="base.css" />
