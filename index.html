@@ -6,12 +6,14 @@
   <meta name="robots" content="noindex,nofollow" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js"></script>
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script> 
-  <script>tinymce.init({
+  
+  <script>
+  function setKontentValue(){
+  console.log(CustomElement)
+CustomElement.setValue( document.getElementById('table'))}
+  tinymce.init({
 
-    onchange_callback : function setKontentValue(){
-      console.log(CustomElement)
-    CustomElement.setValue( document.getElementById('table'))
-    },
+    onchange_callback : setKontentValue(),
     selector: 'textarea',
     content_css: ['base.css', 'generic-tables.css'],
     plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
@@ -44,6 +46,8 @@
   
   updateWatchedElementValue(element.config.textElementCodename); 
 }); ;</script>
+
+
   <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 <body>
