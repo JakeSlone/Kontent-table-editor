@@ -7,6 +7,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.9.11/tinymce.min.js"></script>
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script> 
   <script>tinymce.init({
+
+    onchange_callback : function setKontentValue(){
+      console.log(CustomElement)
+    CustomElement.setValue( document.getElementById('table'))
+    },
     selector: 'textarea',
     content_css: ['base.css', 'generic-tables.css'],
     plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
@@ -35,11 +40,7 @@
   });</script>
 <script>CustomElement.init((element, context) => {
   console.log(context.projectId)
-  setConfig(element.config); 
-  setProjectId(context.projectId); 
-  setIsDisabled(element.disabled); 
-  setItemName(context.item.name); 
-  setElementValue(element.value ?? ''); 
+  
   
   updateWatchedElementValue(element.config.textElementCodename); 
 }); ;</script>
@@ -48,6 +49,6 @@
 <body>
   <noscript>Sorry, this editor only works with JavaScript.</noscript>
 
-  <textarea></textarea>
+  <textarea id="table"></textarea>
 </body>
 </html>
