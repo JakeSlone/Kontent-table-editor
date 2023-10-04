@@ -23,7 +23,7 @@ CustomElement.init((element, context) => {
     }
 
     tinymce.init({
-      onchange_callback: setKontentValue(),
+      onchange_callback: setKontentValue,
       selector: 'textarea',
       content_css: ['base.css', 'generic-tables.css'],
       plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
