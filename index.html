@@ -19,12 +19,20 @@ CustomElement.init((element, context) => {
 
     function setKontentValue() {
       console.log("hit me")
-      CustomElement.setValue(document.getElementById('table'))
+      let content = tinymce.activeEditor.getContent();
+      CustomElement.setValue(content)
     }
 
     tinymce.init({
       onchange_callback: setKontentValue,
       selector: 'textarea',
+      setup: function(ed){
+        ed.on("change", function(){
+          console.log("hit me")
+      let content = tinymce.activeEditor.getContent();
+      CustomElement.setValue(content)
+        })
+      },
       content_css: ['base.css', 'generic-tables.css'],
       plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
       menubar: false,
