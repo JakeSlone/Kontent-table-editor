@@ -12,7 +12,7 @@
 
 CustomElement.init((element, context) => {
       console.log(context.projectId)
-      element.setValue()
+      
       element.disabled = false
       
     })
@@ -29,7 +29,7 @@ CustomElement.init((element, context) => {
         ed.on("keyup", function(){
          
       let content = tinymce.activeEditor.getContent(); 
-      console.log("hit me with content ", content )
+      console.log("hit keyup, content ", content )
       CustomElement.setValue(content)
         }
       )
@@ -38,7 +38,7 @@ CustomElement.init((element, context) => {
         ed.on("change", function(){
          
       let content = tinymce.activeEditor.getContent(); 
-      console.log("hit me with content ", content )
+      console.log("hit change content ", content )
       CustomElement.setValue(content)
         }
       )
