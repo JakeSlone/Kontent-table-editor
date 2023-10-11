@@ -31,8 +31,19 @@ CustomElement.init((element, context) => {
       let content = tinymce.activeEditor.getContent(); 
       console.log("hit me with content ", content )
       CustomElement.setValue(content)
-        })
+        }
+      )
       },
+      setup: function(ed){
+        ed.on("change", function(){
+         
+      let content = tinymce.activeEditor.getContent(); 
+      console.log("hit me with content ", content )
+      CustomElement.setValue(content)
+        }
+      )
+      },
+    
       content_css: ['base.css', 'generic-tables.css'],
       plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
       menubar: false,
