@@ -35,7 +35,7 @@ CustomElement.init((element, context) => {
       )
       },
       setup: function(ed){
-        ed.on("change", function(){
+        ed.on("change, keyup", function(){
          
       let content = tinymce.activeEditor.getContent(); 
       console.log("hit change content ", content )
