@@ -12,22 +12,21 @@
 
 CustomElement.init((element, context) => {
       console.log(context.projectId)
-      
+      element.setValue()
       element.disabled = false
-
+      
     })
 
     function setKontentValue() {
-      console.log("hit me")
       let content = tinymce.activeEditor.getContent();
       CustomElement.setValue(content)
     }
 
     tinymce.init({
-      onchange_callback: setKontentValue,
+     
       selector: 'textarea',
       setup: function(ed){
-        ed.on("change", "keyup", function(){
+        ed.on("keyup", function(){
          
       let content = tinymce.activeEditor.getContent(); 
       console.log("hit me with content ", content )
