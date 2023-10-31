@@ -12,7 +12,7 @@
 
 CustomElement.init((element, context) => {
       console.log(context.projectId)
-      
+      CustomElement.setHeight(500)
       element.disabled = false
       
     })
@@ -25,24 +25,26 @@ CustomElement.init((element, context) => {
     tinymce.init({
      
       selector: 'textarea',
-      setup: function(ed){
-        ed.on("keyup", function(){
-         
-      let content = tinymce.activeEditor.getContent(); 
-      console.log("hit keyup, content ", content )
-      CustomElement.setValue(content)
-        }
-      )
-      },
-      setup: function(ed){
-        ed.on("change keyup", function(){
+      
+      setup: function(editor){
+        editor.on("change keyup", function(){
          
       let content = tinymce.activeEditor.getContent(); 
       console.log("hit change content ", content )
       CustomElement.setValue(content)
-        }
+        },
+        
+        init_instance_callback: function(editor){
+        editor.on('SetContent', function (e) {
+      let content=CustomElement.getValue();
+
+      e.contnet= content
+      
+      }
       )
       },
+
+      
     
       content_css: ['base.css', 'generic-tables.css'],
       plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
