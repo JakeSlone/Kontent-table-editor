@@ -19,6 +19,7 @@ CustomElement.init((element, context) => {
 
     function setKontentValue() {
       let content = tinymce.activeEditor.getContent();
+      console.log('content', content)
       CustomElement.setValue(content)
     }
 
