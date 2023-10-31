@@ -27,8 +27,9 @@ CustomElement.init((element, context) => {
       selector: 'textarea',
       setup: function(ed){
         ed.on("keyup", function(){
-         
-      let content = tinymce.activeEditor.getContent(); 
+      
+      let content = tinymce.activeEditor.getContent();    
+      console.log(content)
       console.log("hit keyup, content ", content )
       CustomElement.setValue(content)
         }
