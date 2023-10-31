@@ -17,21 +17,17 @@ CustomElement.init((element, context) => {
       
     })
 
-    function setKontentValue() {
-      let content = tinymce.activeEditor.getContent();
-      console.log('content', content)
-      CustomElement.setValue(content)
-    }
+ 
 
     tinymce.init({
      
       selector: 'textarea',
       setup: function(ed){
-        ed.on("keyup", function(){
+        ed.on("keyup change", function(){
       
       let content = tinymce.activeEditor.getContent();    
-      console.log(content)
-      console.log("hit keyup, content ", content )
+      console.log("content", content)
+ 
       CustomElement.setValue(content)
         }
       )
