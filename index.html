@@ -26,6 +26,12 @@ CustomElement.init((element, context) => {
      
       selector: 'textarea',
       setup: function(ed){
+        ed.on('init', function () {
+        // Get the initial content from the Custom Element and set it in TinyMCE
+        const initialContent = element.value;
+        tinymce.activeEditor.setContent(initialContent);
+      });
+
         ed.on("keyup change", function(){
       
       let content = tinymce.activeEditor.getContent();    
