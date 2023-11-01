@@ -14,6 +14,8 @@ CustomElement.init((element, context) => {
       console.log(context.projectId)
       CustomElement.setHeight(500)
       element.disabled = false
+      const initialContent = CustomElement.getValue();
+  tinymce.activeEditor.setContent(initialContent);
       
     })
 
