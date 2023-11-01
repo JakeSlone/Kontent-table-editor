@@ -9,84 +9,49 @@
   <script src="https://app.kontent.ai/js-api/custom-element/v1/custom-element.min.js"></script>
 
   <script>
+    CustomElement.init((element, context) => {
+      console.log(context.projectId);
+      CustomElement.setHeight(500);
+      element.disabled = false;
 
-CustomElement.init((element, context) => {
-      console.log(context.projectId)
-      CustomElement.setHeight(500)
-      element.disabled = false
-      const initialContent = element.value;
-      console.log(element.value)
-  tinymce.activeEditor.setContent(initialContent);
-      
-    })
+      tinymce.init({
+        selector: 'textarea',
+        setup: function (ed) {
+          ed.on('init', function () {
+            // Get the initial content from the Custom Element and set it in TinyMCE
+            const initialContent = CustomElement.value;
+            console.log('init value in callback', initialContent);
+            tinymce.activeEditor.setContent(initialContent);
+          });
 
- 
-
-    tinymce.init({
-     
-      selector: 'textarea',
-      setup: function(ed){
-        ed.on('init', function () {
-        // Get the initial content from the Custom Element and set it in TinyMCE
-        const initialContent = element.value;
-        console.log('init value in callback', initialContent)
-        tinymce.activeEditor.setContent(initialContent);
-        console.log(tinymce.activeEditor)
+          ed.on("keyup change", function () {
+            let content = tinymce.activeEditor.getContent();
+            console.log("content", content);
+            CustomElement.setValue(content);
+          });
+        },
+        content_css: ['base.css', 'generic-tables.css'],
+        plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
+        menubar: false,
+        toolbar: 'newdocument | table tablerowprops tablecellprops tablemergecells | alignnone alignright bold styleselect | nonbreaking visualchars | preparetable code',
+        table_toolbar: 'tablerowprops tablecellprops tablemergecells | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol', // below every table
+        contextmenu: 'tableprops cell row column', // appears on right click
+        autoresize_max_height: 600,
+        formats: {
+          alignright: { selector: 'td,th', classes: 'numeric' },
+        },
+        style_formats: [
+          { title: 'Visually hidden text', inline: 'span', classes: 'visuallyhidden' },
+        ],
+        valid_elements: 'table[class|id|style|border],caption,col[class|style],colgroup[span|class|style],thead[class|style],tbody[class|style],tfoot[class|style],tr[class|style],td[scope|colspan|rowspan|class|style],th[scope|colspan|rowspan|class|style],strong,span[class|style],abbr[title],br',
+        forced_root_block: false,
+        table_grid: false,
+        table_advtab: false,
+        table_cell_advtab: false,
+        table_row_advtab: false,
       });
-
-        ed.on("keyup change", function(){
-      
-      let content = tinymce.activeEditor.getContent();    
-      console.log("content", content)
- 
-      CustomElement.setValue(content)
-        }
-      )
-      },
-      setup: function(ed){
-        ed.on("change keyup", function(){
-         
-      let content = tinymce.activeEditor.getContent(); 
-      console.log("hit change content ", content )
-      CustomElement.setValue(content)
-        }
-      )
-      },
-    
-      content_css: ['base.css', 'generic-tables.css'],
-      plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
-      menubar: false,
-      toolbar: 'newdocument | table tablerowprops tablecellprops tablemergecells | alignnone alignright bold styleselect | nonbreaking visualchars | preparetable code',
-      table_toolbar: 'tablerowprops tablecellprops tablemergecells | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol', // below every table
-      contextmenu: 'tableprops cell row column', // appears on right click
-      autoresize_max_height: 600,
-      formats: {
-        alignright: { selector: 'td,th', classes: 'numeric' },
-      },
-      style_formats: [
-        { title: 'Visually hidden text', inline: 'span', classes: 'visuallyhidden' },
-      ],
-      // only allow table elements, plus a few more useful inline elements
-      // br = if added, TinyMCE adds br's all over the place (but they don't get through to the source code to be copied), causing issues with marking of empty header cells
-      // class: source-tableeditor = in case we need to do something in slimmer
-      valid_elements: 'table[class|id|style|border],caption,col[class|style],colgroup[span|class|style],thead[class|style],tbody[class|style],tfoot[class|style],tr[class|style],td[scope|colspan|rowspan|class|style],th[scope|colspan|rowspan|class|style],strong,span[class|style],abbr[title],br',
-      forced_root_block: false,
-      table_grid: false,
-      table_advtab: false,
-      table_cell_advtab: false,
-      table_row_advtab: false,
-
-
-    })
-    ;</script>
-  
-  <script>CustomElement.init((element, context) => {
-      console.log(context.projectId)
-      console.log(element)
-      element.disabled = false
-
-    });;</script>
-
+    });
+  </script>
 
   <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
