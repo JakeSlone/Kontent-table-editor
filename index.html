@@ -13,7 +13,7 @@
       console.log(context.projectId);
       CustomElement.setHeight(500);
       element.disabled = false;
-
+      let height = 100
       tinymce.init({
         selector: 'textarea',
         setup: function (ed) {
@@ -22,6 +22,8 @@
             const initialContent = element.value;
             console.log('init value in callback', initialContent);
             tinymce.activeEditor.setContent(initialContent);
+            height = parseInt($("html").height())
+            CustomElement.setHeight(height)
           });
 
           ed.on("keyup change", function () {
