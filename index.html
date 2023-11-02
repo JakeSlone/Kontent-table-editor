@@ -13,7 +13,8 @@
       console.log(context.projectId);
       CustomElement.setHeight(500);
       element.disabled = false;
-      let height = 100
+      
+
       tinymce.init({
         selector: 'textarea',
         setup: function (ed) {
@@ -21,24 +22,27 @@
             // Get the initial content from the Custom Element and set it in TinyMCE
             const initialContent = element.value;
             console.log('init value in callback', initialContent);
+           
             tinymce.activeEditor.setContent(initialContent);
-            const htmlElement = document.querySelector('html');
-            let height = htmlElement.clientHeight
-            CustomElement.setHeight(height)
           });
 
           ed.on("keyup change", function () {
             let content = tinymce.activeEditor.getContent();
             console.log("content", content);
-            CustomElement.setValue(content);
+            CustomElement.setValue(content); 
+            
+            const textarea = document.getElementById('tinymce');
+
+            // Update the height of the custom element based on the textarea's scrollHeight
+            CustomElement.setHeight(textarea.scrollHeight);
           });
         },
         content_css: ['base.css', 'generic-tables.css'],
         plugins: 'table autoresize code contextmenu nonbreaking paste visualchars',
         menubar: false,
         toolbar: 'newdocument | table tablerowprops tablecellprops tablemergecells | alignnone alignright bold styleselect | nonbreaking visualchars | preparetable code',
-        table_toolbar: 'tablerowprops tablecellprops tablemergecells | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol', // below every table
-        contextmenu: 'tableprops cell row column', // appears on right click
+        table_toolbar: 'tablerowprops tablecellprops tablemergecells | tableinsertrowbefore tableinsertrowafter tabledeleterow | tableinsertcolbefore tableinsertcolafter tabledeletecol',
+        contextmenu: 'tableprops cell row column',
         autoresize_max_height: 600,
         formats: {
           alignright: { selector: 'td,th', classes: 'numeric' },
@@ -56,7 +60,7 @@
     });
   </script>
 
-  <link rel="stylesheet" type="text/css" href="base.css" />
+  <link rel="stylesheet" type="css" href="base.css" />
 </head>
 
 <body>
