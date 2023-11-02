@@ -13,7 +13,6 @@
       console.log(context.projectId);
       CustomElement.setHeight(500);
       element.disabled = false;
-      
 
       tinymce.init({
         selector: 'textarea',
@@ -22,20 +21,20 @@
             // Get the initial content from the Custom Element and set it in TinyMCE
             const initialContent = element.value;
             console.log('init value in callback', initialContent);
-           
             tinymce.activeEditor.setContent(initialContent);
           });
 
           ed.on("keyup change", function () {
             let content = tinymce.activeEditor.getContent();
             console.log("content", content);
-            CustomElement.setValue(content); 
-            
-            const textarea = document.getElementById('html');
-            console.log(textarea.scrollHeight)
+            CustomElement.setValue(content);
+
+            const textarea = document.getElementById('table'); // Correct the ID
+            const textareaHeight = textarea.scrollHeight;
+            console.log("Textarea height:", textareaHeight);
 
             // Update the height of the custom element based on the textarea's scrollHeight
-            CustomElement.setHeight(500+textarea.scrollHeight);
+            CustomElement.setHeight(500 + textareaHeight);
           });
         },
         content_css: ['base.css', 'generic-tables.css'],
@@ -61,7 +60,7 @@
     });
   </script>
 
-  <link rel="stylesheet" type="css" href="base.css" />
+  <link rel="stylesheet" type="text/css" href="base.css" />
 </head>
 
 <body>
