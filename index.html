@@ -31,10 +31,11 @@
             console.log("content", content);
             CustomElement.setValue(content); 
             
-            const textarea = document.getElementById('table');
+            const textarea = document.getElementById('html');
+            console.log(textarea.scrollHeight)
 
             // Update the height of the custom element based on the textarea's scrollHeight
-            CustomElement.setHeight(200+textarea.scrollHeight);
+            CustomElement.setHeight(500+textarea.scrollHeight);
           });
         },
         content_css: ['base.css', 'generic-tables.css'],
