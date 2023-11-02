@@ -22,7 +22,7 @@
             const initialContent = element.value;
             console.log('init value in callback', initialContent);
             tinymce.activeEditor.setContent(initialContent);
-            height = parseInt($("html").height())
+            height = parseInt(ed.height())
             console.log(height)
             CustomElement.setHeight(height)
           });
