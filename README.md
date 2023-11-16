@@ -1,6 +1,6 @@
 # Table editor
 
-WYSIWYG HTML editor for complex tables, when Markdown just doesn't cut it.
+WYSIWYG HTML editor for complex tables, as a Custom Element for Kontent.ai
 
 
 ## Screenshots
